@@ -1,5 +1,6 @@
-import digitalocean
+#!/usr/local/bin/python
 
+import digitalocean
 
 with open ("token-api.txt", "r") as file:
     token = file.read()
