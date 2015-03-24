@@ -1,10 +1,14 @@
+#!/usr/bin/ruby
+
+require './config.rb'
 require 'fog'
 
 docean = Fog::Compute.new({
   :provider => 'DigitalOcean',
-  :digitalocean_api_key   => 'b186e1ca2928bb56fe6c9c5c1533c6c6', # your API key here
-  :digitalocean_client_id => '1368a5b6f9367dcdfd78034138339c86'          # your client key here
+  :digitalocean_api_key   => @docean_api_key, # your API key here
+  :digitalocean_client_id => @docean_client_id          # your client key here
 })
+
 
 
 docean.servers.each do |server|
