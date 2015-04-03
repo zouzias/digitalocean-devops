@@ -1,6 +1,32 @@
 #!/usr/bin/ruby
 
 
+
+def list_domainRecords(client, domain)
+        record_ids = []
+
+        # List all domains
+        client.domain_records.all(for_domain: domain).each_with_index{ |x, i|
+            puts "[" + i.to_s + "] name: " + x.name + " id: " + x.id.to_s
+            record_ids << x.name
+        }
+
+        return record_ids
+end
+
+def list_domains(client)
+        domain_ids = []
+
+        # List all domains
+        client.domains.all.each_with_index{ |x, i|
+            puts "[" + i.to_s + "] name: " + x.name 
+            domain_ids << x.name
+        }
+
+        return domain_ids
+end
+
+
 def list_sshkeys(client)
         sshkey_ids = []
 
