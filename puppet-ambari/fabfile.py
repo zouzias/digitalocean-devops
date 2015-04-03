@@ -11,39 +11,23 @@ env.key_filename = '~/.ssh/digitalocean_rsa'
 with open('ambari-server.txt') as f:
     env.hosts = f.readlines()
 
-def check_bash():
-    run('curl https://shellshocker.net/shellshock_test.sh | bash')
-
 ##############################
 # Install puppet etc
 ##############################
 def init():
+    put('ambari.list', '/etc/apt/sources.list.d/', use_sudo=True)
+    sudo('apt-key adv --recv-keys --keyserver keyserver.ubuntu.com B9733A7A07513CAD')
     apt_update()
-    sudo('apt-get install bash')
-    put('puppet-bootstrap.sh', '/root/', use_sudo=True)
-    sudo('sh puppet-bootstrap.sh')
+    sudo('apt-get install -qy ambari-server')
+    sudo('ambari-server setup --silent')
+    ambari_start()
+
+def ambari_start():
+    sudo('ambari-server start')
 
 def clients():
     with open('ambari-clients.txt') as f:
         env.hosts = f.readlines()
-
-# Deploy
-def deploy():
-    bootstrap()
-    provision()
-
-# Copy ssh key (from env.key_filename)
-def copy_ssh_key():
-   put(env.key_filename, '~/.ssh/',  mode=0600)
-
-# Bootstrap VMs (copy ssh keys, ssh config, files and install puppet)
-def bootstrap():
-    write_ssh_config()
-    copy_files()
-
-# Apply provisioning with puppet
-def provision():
-    sudo('puppet apply --modulepath /etc/puppet/modules/ /etc/puppet/manifests/default.pp')
 
 # Copy files puppet related files
 def copy_files():
@@ -54,6 +38,8 @@ def apt_clean():
 
 def apt_update():
     sudo('apt-get update')
+
+def apt_upgrade():
     sudo('apt-get -qy upgrade')
 
 def uptime():
