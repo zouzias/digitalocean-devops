@@ -8,7 +8,7 @@ def list_domainRecords(client, domain)
         # List all domains
         client.domain_records.all(for_domain: domain).each_with_index{ |x, i|
             puts "[" + i.to_s + "] name: " + x.name + " id: " + x.id.to_s
-            record_ids << x.name
+            record_ids << x.id
         }
 
         return record_ids
