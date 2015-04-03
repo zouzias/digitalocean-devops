@@ -16,7 +16,7 @@ droplet_id = select_droplet(client)
 
 droplet_id = droplet_id.to_s
 
-if droplet_id
+if !droplet_id.empty?
    puts 'Initiate delete of droplet with id ' + droplet_id 
    client.droplets.delete(id: droplet_id)
    puts 'Droplet has been successfully deleted...'

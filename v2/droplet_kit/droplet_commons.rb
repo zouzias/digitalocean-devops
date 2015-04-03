@@ -1,8 +1,17 @@
 #!/usr/bin/ruby
 
 
+def list_sshkeys(client)
+        sshkey_ids = []
 
+        # List all keys
+        client.ssh_keys.all.each_with_index{ |x, i|
+        puts "[" + i.to_s + "] [SSHKey] id: " + x.id.to_s + " , name: " + x.name
+            sshkey_ids << x.id
+        }
 
+	return sshkey_ids
+end
 
 def list_regions(client)
         region_ids = []
@@ -63,13 +72,16 @@ end
 
 
 def select_option(array)
-	# Get the droplet id
-	print "Select a number [0 - " + array.length.to_s + "]\n"
-	index = gets
+	if ! array.empty?
 
-	id = array[index.to_i]
+		# Get the droplet id
+		print "Select a number [0 - " + array.length.to_s + "]\n"
+		index = gets
 
-	return id
+		id = array[index.to_i]
+
+		return id
+	end
 end
 
 def select_droplet(client)
@@ -81,7 +93,18 @@ def select_image(client)
 	ids = list_images(client)
 	return select_option(ids)
 end
+
 def select_region(client)
 	ids = list_regions(client)
+	return select_option(ids)
+end
+
+def select_sshkey(client)
+	ids = list_sshkeys(client)
+	return select_option(ids)
+end
+
+def select_size(client, region_slug)
+	ids = list_sizes(client, region_slug)
 	return select_option(ids)
 end
