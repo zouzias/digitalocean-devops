@@ -18,6 +18,7 @@ image  = 'ubuntu-12-04-x64'
 region = 'ams2'
 size   = '1g'
 sshkey = 726646
+domain = 'zouzias.org'
 
 puts "Selected region      : " + region
 puts "Selected size        : " + size
@@ -27,5 +28,30 @@ puts "Selected droplet name: [" + name + "]"
 # TODO fetch SSH keys from digitalocean
 droplet = DropletKit::Droplet.new(name: name , region: region, size: '512mb', image: image, ssh_keys: [sshkey.to_s])
 
-client.droplets.create(droplet)
+created = client.droplets.create(droplet)
 
+print created.inspect
+
+droplet_id = created.id
+
+while created.status != 'active' do
+	sleep 1
+	print "."
+	created = client.droplets.find(id: droplet_id)
+end
+
+puts created.inspect
+puts "Droplet created with IP " + created.networks.v4[0].ip_address
+
+ip = created.networks.v4[0].ip_address
+
+print "IP address is " + ip
+
+domain_record = DropletKit::DomainRecord.new(
+  type: 'A',
+  name: 'ambari',
+  data: ip,
+)
+
+created = client.domain_records.create(domain_record, for_domain: domain)
+print created.inspect

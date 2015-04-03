@@ -7,6 +7,8 @@ from fabric.operations import run, put, sudo,local
 env.user  = 'root'
 env.key_filename = '~/.ssh/digitalocean_rsa'
 
+domain = 'zouzias.org'
+
 # Populate host names 
 with open('ambari-server.txt') as f:
     env.hosts = f.readlines()
@@ -23,11 +25,17 @@ def init():
     ambari_start()
 
 def ambari_start():
-    sudo('ambari-server start')
+    sudo('ambari-server restart')
+
+def ambari_status():
+    sudo('ambari-server status')
 
 def clients():
-    with open('ambari-clients.txt') as f:
+    with open('ambari-clients-fqdn.txt') as f:
         env.hosts = f.readlines()
+
+def iptables_stop():
+    sudo('service iptables stop')
 
 # Copy files puppet related files
 def copy_files():
@@ -46,6 +54,7 @@ def uptime():
     run('uptime')
 
 def install_ntp():
+   apt_update()
    sudo('apt-get install -y ntp')
 
 def reboot():
