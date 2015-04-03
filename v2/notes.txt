@@ -1,0 +1,4 @@
+
+# If you get warning regarding bigdecimal
+
+# sudo /usr/bin/gem uninstall bigdecimal --version 1.2.7
