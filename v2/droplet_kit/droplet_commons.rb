@@ -44,15 +44,17 @@ end
 
 
 def list_images(client)
-	image_ids = []
+	image_slugs = []
 
 	# List all images
 	client.images.all.each_with_index{ |x, i|
-	    puts "[" + i.to_s + "] Image " + "id: " + x.id.to_s + " distribution: " + x.distribution  + " name: " + x.name
-	    image_ids << x.id
+		if x.slug
+			puts "[" + i.to_s + "] Image " + "slug: " + x.slug + " distribution: " + x.distribution  + " name: " + x.name
+			image_slugs << x.slug
+		end	
 	}
 
-	return image_ids
+	return image_slugs
 end
 
 def list_droplets(client)
