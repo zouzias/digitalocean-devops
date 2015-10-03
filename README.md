@@ -1,5 +1,5 @@
 # digitalocean-devops
-Devops with digitalocean backend
+Devops with [digitalocean](https://www.digitalocean.com)'s cloud provide
 
 Tools for accessing digitalocean's droplets using v2 API and [droplet_kit](https://github.com/digitalocean/droplet_kit).
 
