@@ -5,6 +5,12 @@ Tools for accessing digitalocean's droplets using v2 API and [droplet_kit](https
 
 ### Configuration
 
+Install gem `droplet_kit`
+
+```
+gem install droplet_kit
+```
+
 Place your v2 token API in
 
 ```
