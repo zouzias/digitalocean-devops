@@ -12,3 +12,16 @@ https://github.com/zouzias/digitalocean-devops/blob/master/v2/droplet_kit/config
 ```
 
 Then, you can use the following list of commands:  [v2](https://github.com/zouzias/digitalocean-devops/tree/master/v2/droplet_kit)
+
+### Commands
+* domains.rb
+* createDroplet.rb 
+* regions.rb
+* deleteDroplet.rb 
+* droplets.rb     
+* sizesPerRegion.rb
+* domainRecordsDeleteALL.rb  
+* images.rb          
+* sshKeys.rb
+* domainRecords.rb 
+* inspectDroplet.rb
