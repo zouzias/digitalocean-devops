@@ -1,5 +1,5 @@
 # digitalocean-devops
-Devops with [digitalocean](https://www.digitalocean.com)'s cloud provide
+Devops with [digitalocean](https://www.digitalocean.com)'s cloud provider.
 
 Tools for accessing digitalocean's droplets using v2 API and [droplet_kit](https://github.com/digitalocean/droplet_kit).
 
@@ -20,14 +20,14 @@ https://github.com/zouzias/digitalocean-devops/blob/master/v2/droplet_kit/config
 Then, you can use the following list of commands:  [v2](https://github.com/zouzias/digitalocean-devops/tree/master/v2/droplet_kit)
 
 ### Commands
-* domains.rb
-* createDroplet.rb 
-* regions.rb
-* deleteDroplet.rb 
-* droplets.rb     
-* sizesPerRegion.rb
-* domainRecordsDeleteALL.rb  
-* images.rb          
-* sshKeys.rb
-* domainRecords.rb 
-* inspectDroplet.rb
+* `domains.rb`
+* `createDroplet.rb` 
+* `regions.rb`
+* `deleteDroplet.rb` 
+* `droplets.rb`     
+* `sizesPerRegion.rb`
+* `domainRecordsDeleteALL.rb`  
+* `images.rb`          
+* `sshKeys.rb`
+* `domainRecords.rb` 
+* `inspectDroplet.rb`
